@@ -1,34 +1,29 @@
 pipeline {
     agent any
-    
-    environment {
-        APP_DIR='/var/lib/jenkins/workspace/scripted_pipeline/demo-app'
-        JAR_FILE='myapp-0.0.1-SNAPSHOT.jar'
+    environment{
+        APP_DIR = '/var/lib/jenkins/workspace/scripted_pipeline/Devops_JenkinsIntro'
+        JAR_FILE = 'myapp-0.0.1-SNAPSHOT.jar'
     }
 
-    stages {
-        stage('Clean Workspace'){
+    stages{
+        stage('Clean workspace'){
             steps{
                 cleanWs()
             }
         }
-        stage('Cloning Git Repo') {
+        stage('Cloning the Git Repo') {
             steps {
-                script {
-                    sh 'git clone "https://github.com/neerajbalodi/demo-app.git"'
-                }
+               sh 'git clone https://github.com/Tejasvi02/Devops_JenkinsIntro.git'
             }
         }
-        stage('Build Application') {
+        stage('Build appilcation') {
             steps {
-                script {
-                    sh 'cd demo-app && mvn clean install'
-                }
+               sh 'cd Devops_JenkinsIntro && mvn clean install'
             }
         }
-        stage('Run Application') {
-            steps {
-                script {
+        stage('Run Application'){
+            steps{
+                script{
                     sh 'cd $APP_DIR/target'
                 }
             }
